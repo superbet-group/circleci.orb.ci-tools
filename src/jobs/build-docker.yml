@@ -5,7 +5,7 @@ parameters:
   image-name:
     type: string
     description: "docker image name"
-  
+
   image-tag:
     type: string
     description: "docker image tag"
@@ -13,7 +13,7 @@ parameters:
   extra-build-args:
     type: string
     description: "extra flags to pass to docker build"
-  
+
   gh-token:
     type: env_var_name
     default: GH_TOKEN
@@ -37,5 +37,3 @@ steps:
   - docker/build:
       image: << parameters.image-name >>
       extra_build_args: << parameters.extra-build-args >>
-
-    

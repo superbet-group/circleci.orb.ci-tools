@@ -3,13 +3,14 @@ description: >
 
 parameters:
   docker-user:
-    type: 
+    type: env_var_name
     default: DOCKER_USER
-    description: 
+    description: "env var name with docker username"
 
   docker-pass:
     type: env_var_name
-    default: DOCKER_PASS
+    default: DOCKER_PAS
+    description: "env var name with docker password"
 
 steps:
   - run:

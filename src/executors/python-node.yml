@@ -10,7 +10,7 @@ parameters:
     default: "3.7.6-stretch-node"
 
 docker:
-  - image: 'circleci/python:<<parameters.tag>>'
+  - image: "circleci/python:<<parameters.tag>>"
     auth:
       username: $DOCKERHUB_USERNAME
       password: $DOCKERHUB_PASSWORD
