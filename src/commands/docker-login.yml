@@ -9,10 +9,10 @@ parameters:
 
   docker-pass:
     type: env_var_name
-    default: DOCKER_PAS
+    default: DOCKER_PASS
     description: "env var name with docker password"
 
 steps:
   - run:
       name: docker login
-      command: "echo ${<<parameters.docker-pass>>} | docker login -u ${<<parameters.docker-user>>} --password-stdin"
+      command: "docker login -u ${<<parameters.docker-user>>} -p ${<<parameters.docker-pass>>}"
