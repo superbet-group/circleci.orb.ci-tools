@@ -1,0 +1,17 @@
+description: >
+  This command performs Docker login.
+
+parameters:
+  docker-user:
+    type: 
+    default: DOCKER_USER
+    description: 
+
+  docker-pass:
+    type: env_var_name
+    default: DOCKER_PASS
+
+steps:
+  - run:
+      name: docker login
+      command: "echo ${<<parameters.docker-pass>>} | docker login -u ${<<parameters.docker-user>>} --password-stdin"

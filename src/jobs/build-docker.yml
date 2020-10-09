@@ -1,0 +1,41 @@
+description: >
+  This jobs builds builds docker image
+
+parameters:
+  image-name:
+    type: string
+    description: "docker image name"
+  
+  image-tag:
+    type: string
+    description: "docker image tag"
+
+  extra-build-args:
+    type: string
+    description: "extra flags to pass to docker build"
+  
+  gh-token:
+    type: env_var_name
+    default: GH_TOKEN
+
+  secret-key:
+    type: env_var_name
+    default: AWS_SECRET_KEY
+
+shell: /bin/bash --login -eo pipefail
+
+executor: python-node
+
+steps:
+  - checkout
+  - setup_remote_docker:
+      version: 19.03.13
+      docker_layer_caching: true
+  - aws-cli/install
+  - aws-ecr/ecr-login
+  - docker-login
+  - docker/build:
+      image: << parameters.image-name >>
+      extra_build_args: << parameters.extra-build-args >>
+
+    
