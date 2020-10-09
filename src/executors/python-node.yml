@@ -1,0 +1,16 @@
+description: >
+  CircleCI Python executor with parameterized tag.
+
+parameters:
+  tag:
+    description: >
+      Pick a specific circleci/python image variant:
+      https://hub.docker.com/r/circleci/python/tags
+    type: string
+    default: "3.7.6-stretch-node"
+
+docker:
+  - image: 'circleci/python:<<parameters.tag>>'
+    auth:
+      username: $DOCKERHUB_USERNAME
+      password: $DOCKERHUB_PASSWORD
