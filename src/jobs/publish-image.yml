@@ -13,6 +13,7 @@ parameters:
   extra-build-args:
     type: string
     description: extra flags to pass to docker build
+    default: ""
 
 shell: /bin/bash --login -eo pipefail
 
