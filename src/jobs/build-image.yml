@@ -1,26 +1,14 @@
 description: >
-  This jobs builds builds docker image
+  This jobs builds docker image.
 
 parameters:
   image-name:
     type: string
     description: "docker image name"
 
-  image-tag:
-    type: string
-    description: "docker image tag"
-
   extra-build-args:
     type: string
-    description: "extra flags to pass to docker build"
-
-  gh-token:
-    type: env_var_name
-    default: GH_TOKEN
-
-  secret-key:
-    type: env_var_name
-    default: AWS_SECRET_KEY
+    description: extra flags to pass to docker build
 
 shell: /bin/bash --login -eo pipefail
 

@@ -1,0 +1,13 @@
+description: >
+  This jobs performs npx semantic release.
+
+shell: /bin/bash --login -eo pipefail
+
+executor: python-node
+
+steps:
+  - checkout
+  - run:
+      name: Create new version
+      command: |
+        npx semantic-release

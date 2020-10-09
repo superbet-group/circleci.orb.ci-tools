@@ -1,0 +1,34 @@
+description: >
+  This jobs publishes docker image to ECR.
+
+parameters:
+  image-name:
+    type: string
+    description: docker image name
+
+  image-tag:
+    type: string
+    description: docker image tag
+
+  extra-build-args:
+    type: string
+    description: extra flags to pass to docker build
+
+shell: /bin/bash --login -eo pipefail
+
+executor: python-node
+
+steps:
+  - checkout
+  - setup_remote_docker:
+      version: 19.03.13
+      docker_layer_caching: true
+  - aws-cli/install
+  - aws-ecr/ecr-login
+  - docker-login
+  - aws-ecr/build-and-push-image:
+      checkout: false
+      repo: <<parameters.image-name>>
+      tag: <<parameters.image-tag>>
+      extra-build-args: <<parameters.extra-build-args>>
+      create-repo: true
