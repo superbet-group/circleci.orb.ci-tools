@@ -15,4 +15,4 @@ parameters:
 steps:
   - run:
       name: docker login
-      command: "docker login -u ${<<parameters.docker-user>>} -p ${<<parameters.docker-pass>>}"
+      command: "echo ${<<parameters.docker-pass>>} | docker login -u ${<<parameters.docker-user>>} --password-stdin"
