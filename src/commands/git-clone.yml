@@ -1,0 +1,7 @@
+description: >
+  This command performs Git clone.
+
+steps:
+  - run:
+      name: git clone
+      command: <<include(scripts/git-clone.sh)>>

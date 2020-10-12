@@ -1,0 +1,7 @@
+description: >
+  This command creates patch file.
+
+steps:
+  - run:
+      name: create patch file
+      command: <<include(scripts/patch-create.sh)>>

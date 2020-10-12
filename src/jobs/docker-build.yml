@@ -1,5 +1,7 @@
 description: >
   This jobs builds docker image.
+  Exposed environment variables can be used in extra-build-args interpolation.
+  Exposed environment variables: IMAGE_NAME
 
 parameters:
   image-name:
@@ -8,7 +10,7 @@ parameters:
 
   extra-build-args:
     type: string
-    description: extra flags to pass to docker build
+    description: Extraflags to pass to docker build
     default: ""
 
 shell: /bin/bash --login -eo pipefail
@@ -16,6 +18,9 @@ shell: /bin/bash --login -eo pipefail
 executor: python-node
 
 working_directory: ~/app
+
+environment:
+  IMAGE_NAME: <<parameters.image-name>>
 
 steps:
   - checkout

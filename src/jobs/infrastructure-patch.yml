@@ -1,0 +1,74 @@
+description: >
+  This jobs patches infra with new image tag.
+  Exposed environment variables: GIT_USER_NAME, GIT_USER_EMAIL, IMAGE_NAME, IMAGE_TAG, GIT_INFRA_REPO, GIT_INFRA_ACCOUNT, INFRA_APP_PATH, INFRA_NAMESPACE, CONTAINER_NAME
+
+parameters:
+  git-user-name:
+    type: string
+    default: superbet-ci
+    description: Git user name, default value is superbet-ci
+
+  git-user-email:
+    type: string
+    default: superbet@axilis.com
+    description: Git user email, default value is superbet@axilis.com
+
+  image-name:
+    type: string
+    description: Docker image name
+
+  image-tag:
+    type: string
+    description: Docker image tag
+
+  git-infra-account:
+    type: string
+    description: Git infrastructure account
+
+  git-infra-repo:
+    type: string
+    description: Git infrastructure repository
+
+  infra-app-path:
+    type: string
+    description: Relative path to deployment manifest in Git infrastructure repository
+
+  infra-namespace:
+    type: string
+    description: Kubernetes namespace where infrastructure is deployed
+
+  container-name:
+    type: string
+    description: Docker image tag
+
+  kubectl-version:
+    type: string
+    default: v1.12.2
+    description: Kubectl semantic version, default value is v1.12.2
+
+shell: /bin/bash --login -eo pipefail
+
+executor: python-node
+
+working_directory: ~/infra
+
+environment:
+  GIT_USER_NAME: <<parameters.git-user-name>>
+  GIT_USER_EMAIL: <<parameters.git-user-email>>
+  IMAGE_NAME: <<parameters.image-name>>
+  IMAGE_TAG: <<parameters.image-tag>>
+  GIT_INFRA_ACCOUNT: <<parameters.git-infra-account>>
+  GIT_INFRA_REPO: <<parameters.git-infra-repo>>
+  INFRA_APP_PATH: <<parameters.infra-app-path>>
+  INFRA_NAMESPACE: <<parameters.infra-namespace>>
+  CONTAINER_NAME: <<parameters.container-name>>
+
+steps:
+  - checkout:
+    path: ~/app
+  - git-clone
+  - kubernetes/install-kubectl:
+      kubectl-version: <<parameters.kubectl-version>>
+  - patch-create
+  - patch-apply
+  - git-commit-push

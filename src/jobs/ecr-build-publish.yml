@@ -1,18 +1,20 @@
 description: >
   This jobs publishes docker image to ECR.
+  Exposed environment variables can be used in extra-build-args interpolation.
+  Exposed environment variables: IMAGE_NAME, IMAGE_TAG
 
 parameters:
   image-name:
     type: string
-    description: docker image name
+    description: Docker image name
 
   image-tag:
     type: string
-    description: docker image tag
+    description: Docker image tag
 
   extra-build-args:
     type: string
-    description: extra flags to pass to docker build
+    description: Extra flags to pass to docker build
     default: ""
 
 shell: /bin/bash --login -eo pipefail
@@ -20,6 +22,10 @@ shell: /bin/bash --login -eo pipefail
 executor: python-node
 
 working_directory: ~/app
+
+environment:
+  IMAGE_NAME: <<parameters.image-name>>
+  IMAGE_TAG: <<parameters.image-tag>>
 
 steps:
   - checkout

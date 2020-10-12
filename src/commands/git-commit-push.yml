@@ -1,0 +1,7 @@
+description: >
+  This command performs Git commit and push.
+
+steps:
+  - run:
+      name: git commit and push
+      command: <<include(scripts/git-commit-push.sh)>>

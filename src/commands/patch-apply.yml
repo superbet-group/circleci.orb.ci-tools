@@ -1,0 +1,7 @@
+description: >
+  This command performs applies previously created patch file with `kubectl patch`.
+
+steps:
+  - run:
+      name: git commit and push
+      command: <<include(scripts/patch-apply.sh)>>
