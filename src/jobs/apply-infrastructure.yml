@@ -3,6 +3,14 @@ description: >
   Exposed environment variables: GIT_USER_NAME, GIT_USER_EMAIL, IMAGE_NAME, IMAGE_TAG, GIT_INFRA_REPO, GIT_INFRA_ACCOUNT, INFRA_APP_PATH, INFRA_NAMESPACE, CONTAINER_NAME
 
 parameters:
+  image-name:
+    type: string
+    description: Docker image name
+
+  image-tag:
+    type: string
+    description: Docker image tag
+
   git-user-name:
     type: string
     default: superbet-ci
@@ -12,14 +20,6 @@ parameters:
     type: string
     default: superbet@axilis.com
     description: Git user email, default value is superbet@axilis.com
-
-  image-name:
-    type: string
-    description: Docker image name
-
-  image-tag:
-    type: string
-    description: Docker image tag
 
   git-infra-account:
     type: string
@@ -53,10 +53,10 @@ executor: python-node
 working_directory: ~/infra
 
 environment:
-  GIT_USER_NAME: <<parameters.git-user-name>>
-  GIT_USER_EMAIL: <<parameters.git-user-email>>
   IMAGE_NAME: <<parameters.image-name>>
   IMAGE_TAG: <<parameters.image-tag>>
+  GIT_USER_NAME: <<parameters.git-user-name>>
+  GIT_USER_EMAIL: <<parameters.git-user-email>>
   GIT_INFRA_ACCOUNT: <<parameters.git-infra-account>>
   GIT_INFRA_REPO: <<parameters.git-infra-repo>>
   INFRA_APP_PATH: <<parameters.infra-app-path>>
