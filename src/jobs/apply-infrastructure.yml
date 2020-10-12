@@ -5,59 +5,61 @@ description: >
 parameters:
   image-name:
     type: string
-    description: Docker image name
+    description: docker image name
 
   image-tag:
-    type: string
-    description: Docker image tag
+    type: env_var_name
+    default: CIRCLE_TAG
+    description: docker image tag
 
   git-user-name:
     type: string
     default: superbet-ci
-    description: Git user name, default value is superbet-ci
+    description: git user name, default value is superbet-ci
 
   git-user-email:
     type: string
     default: superbet@axilis.com
-    description: Git user email, default value is superbet@axilis.com
+    description: git user email, default value is superbet@axilis.com
 
   git-infra-account:
-    type: string
-    description: Git infrastructure account
+    type: env_var_name
+    default: CIRCLE_PROJECT_USERNAME
+    description: environment variable name with git infrastructure account
 
   git-infra-repo:
     type: string
-    description: Git infrastructure repository
+    description: git infrastructure repository
 
   infra-app-path:
     type: string
-    description: Relative path to deployment manifest in Git infrastructure repository
+    description: relative path to deployment manifest in Git infrastructure repository
 
   infra-namespace:
     type: string
-    description: Kubernetes namespace where infrastructure is deployed
+    description: kubernetes namespace where infrastructure is deployed
 
   container-name:
     type: string
-    description: Docker image tag
+    description: docker image tag
 
   kubectl-version:
     type: string
     default: v1.12.2
-    description: Kubectl semantic version, default value is v1.12.2
+    description: kubectl semantic version, default value is v1.12.2
 
 shell: /bin/bash --login -eo pipefail
 
 executor: python-node
 
-working_directory: ~/infra
+working_directory: ~/infrastructure
 
 environment:
   IMAGE_NAME: <<parameters.image-name>>
-  IMAGE_TAG: <<parameters.image-tag>>
+  IMAGE_TAG: ${<<parameters.image-tag>>}
   GIT_USER_NAME: <<parameters.git-user-name>>
   GIT_USER_EMAIL: <<parameters.git-user-email>>
-  GIT_INFRA_ACCOUNT: <<parameters.git-infra-account>>
+  GIT_INFRA_ACCOUNT: ${<<parameters.git-infra-account>>}
   GIT_INFRA_REPO: <<parameters.git-infra-repo>>
   INFRA_APP_PATH: <<parameters.infra-app-path>>
   INFRA_NAMESPACE: <<parameters.infra-namespace>>
