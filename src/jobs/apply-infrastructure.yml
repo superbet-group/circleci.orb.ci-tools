@@ -65,7 +65,7 @@ environment:
 
 steps:
   - checkout:
-    path: ~/app
+      path: ~/app
   - git-clone
   - kubernetes/install-kubectl:
       kubectl-version: <<parameters.kubectl-version>>
