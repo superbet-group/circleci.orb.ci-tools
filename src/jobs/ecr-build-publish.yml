@@ -9,8 +9,9 @@ parameters:
     description: Docker image name
 
   image-tag:
-    type: string
-    description: Docker image tag
+    type: env_var_name
+    default: CIRCLE_TAG
+    description: environment variable name with docker image tag
 
   extra-build-args:
     type: string
@@ -25,7 +26,7 @@ working_directory: ~/app
 
 environment:
   IMAGE_NAME: <<parameters.image-name>>
-  IMAGE_TAG: <<parameters.image-tag>>
+  IMAGE_TAG: ${<<parameters.image-tag>>}
 
 steps:
   - checkout

@@ -10,7 +10,7 @@ parameters:
   image-tag:
     type: env_var_name
     default: CIRCLE_TAG
-    description: docker image tag
+    description: environment variable name with docker image tag
 
   git-user-name:
     type: string
