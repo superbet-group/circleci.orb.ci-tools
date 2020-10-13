@@ -6,5 +6,5 @@ spec:
     spec:
       containers:
       - name: ${CONTAINER_NAME}
-        image: ${AWS_ECR_ACCOUNT_URL}/${IMAGE_NAME}:${IMAGE_TAG}
+        image: ${AWS_ECR_ACCOUNT_URL}/${IMAGE_NAME}:${!IMAGE_TAG}
 EOF
