@@ -10,7 +10,7 @@ parameters:
 
   image-tag:
     type: string
-    default: ${CIRCLE_TAG}
+    default: $CIRCLE_TAG
     description: docker image tag, default value is taken from CIRCLE_TAG environment variable
 
   extra-build-args:

@@ -9,7 +9,7 @@ parameters:
 
   image-tag:
     type: string
-    default: ${CIRCLE_TAG}
+    default: $CIRCLE_TAG
     description: docker image tag, default value is taken from CIRCLE_TAG environment variable
 
   git-user-name:
@@ -24,7 +24,7 @@ parameters:
 
   git-infra-account:
     type: string
-    default: ${CIRCLE_PROJECT_USERNAME}
+    default: $CIRCLE_PROJECT_USERNAME
     description: git infrastructure account, default value is taken from CIRCLE_PROJECT_USERNAME environment variable
 
   git-infra-repo:
