@@ -9,9 +9,9 @@ parameters:
     description: Docker image name
 
   image-tag:
-    type: string
-    default: $CIRCLE_TAG
-    description: docker image tag, default value is taken from CIRCLE_TAG environment variable
+    type: env_var_name
+    default: CIRCLE_TAG
+    description: environment variable name with docker image tag, default value is CIRCLE_TAG
 
   extra-build-args:
     type: string
@@ -24,10 +24,6 @@ executor: python-node
 
 working_directory: ~/app
 
-environment:
-  IMAGE_NAME: <<parameters.image-name>>
-  IMAGE_TAG: <<parameters.image-tag>>
-
 steps:
   - checkout
   - setup_remote_docker:
@@ -39,6 +35,6 @@ steps:
   - aws-ecr/build-and-push-image:
       checkout: false
       repo: <<parameters.image-name>>
-      tag: <<parameters.image-tag>>
+      tag: ${<<parameters.image-tag>>}
       extra-build-args: <<parameters.extra-build-args>>
       create-repo: true
