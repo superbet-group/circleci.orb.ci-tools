@@ -8,9 +8,9 @@ parameters:
     description: docker image name
 
   image-tag:
-    type: env_var_name
-    default: CIRCLE_TAG
-    description: environment variable name with docker image tag
+    type: string
+    default: ${CIRCLE_TAG}
+    description: docker image tag, default value is taken from CIRCLE_TAG environment variable
 
   git-user-name:
     type: string
@@ -23,9 +23,9 @@ parameters:
     description: git user email, default value is superbet@axilis.com
 
   git-infra-account:
-    type: env_var_name
-    default: CIRCLE_PROJECT_USERNAME
-    description: environment variable name with git infrastructure account
+    type: string
+    default: ${CIRCLE_PROJECT_USERNAME}
+    description: git infrastructure account, default value is taken from CIRCLE_PROJECT_USERNAME environment variable
 
   git-infra-repo:
     type: string
@@ -56,10 +56,10 @@ working_directory: ~/infrastructure
 
 environment:
   IMAGE_NAME: <<parameters.image-name>>
-  IMAGE_TAG: ${<<parameters.image-tag>>}
+  IMAGE_TAG: <<parameters.image-tag>>
   GIT_USER_NAME: <<parameters.git-user-name>>
   GIT_USER_EMAIL: <<parameters.git-user-email>>
-  GIT_INFRA_ACCOUNT: ${<<parameters.git-infra-account>>}
+  GIT_INFRA_ACCOUNT: <<parameters.git-infra-account>>
   GIT_INFRA_REPO: <<parameters.git-infra-repo>>
   INFRA_APP_PATH: <<parameters.infra-app-path>>
   INFRA_NAMESPACE: <<parameters.infra-namespace>>
