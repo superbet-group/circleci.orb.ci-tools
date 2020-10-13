@@ -6,11 +6,11 @@ description: >
 parameters:
   image-name:
     type: string
-    description: "docker image name"
+    description: docker image name
 
   extra-build-args:
     type: string
-    description: Extraflags to pass to docker build
+    description: Extra flags to pass to docker build
     default: ""
 
 shell: /bin/bash --login -eo pipefail
