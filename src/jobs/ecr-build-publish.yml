@@ -1,7 +1,7 @@
 description: >
   This jobs publishes docker image to ECR.
   Exposed environment variables can be used in extra-build-args interpolation.
-  Exposed environment variables: IMAGE_NAME, IMAGE_TAG
+  Exposed environment variables: IMAGE_NAME, IMAGE_TAG_VAR_NAME
 
 parameters:
   image-name:

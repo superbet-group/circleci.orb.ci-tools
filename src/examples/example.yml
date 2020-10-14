@@ -6,8 +6,48 @@ description: >
 usage:
   version: 2.1
   orbs:
-    <orb-name>: <namespace>/<orb-name>@1.2.3
+    ci-tools: superbet-group/ci-tools@1.0.0
   workflows:
-    use-my-orb:
+    version: 2
+    continous-integration:
       jobs:
-        - <orb-name>/<job-name>
+        - ci-tools/docker-build:
+            image-name: dummy.app-1
+            context: betting.aws
+        - ci-tools/increment-version:
+            context: betting.aws
+            requires:
+              - ci-tools/docker-build
+            filters:
+              branches:
+                only:
+                  - master
+                  - /^[0-9]+\.([0-9]+|x|X)\.([0-9]+|x|X)/
+    continous-deployment:
+      jobs:
+        - ci-tools/ecr-build-publish:
+            image-name: dummy.app-1
+            context: betting.aws
+            filters:
+              branches:
+                ignore:
+                  - /.*/
+              tags:
+                only:
+                  - /^v.*/
+        - ci-tools/apply-infrastructure:
+            image-name: dummy.app-1
+            git-infra-repo: dummy.infrastructure
+            infra-app-path: kubernetes/app-1/deployment
+            infra-namespace: dummy
+            container-name: app-1
+            context: betting.aws
+            requires:
+              - ci-tools/ecr-build-publish
+            filters:
+              branches:
+                ignore:
+                  - /.*/
+              tags:
+                only:
+                  - /^v.*/

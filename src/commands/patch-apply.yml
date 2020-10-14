@@ -3,5 +3,5 @@ description: >
 
 steps:
   - run:
-      name: git commit and push
+      name: create patch file
       command: <<include(scripts/patch-apply.sh)>>
