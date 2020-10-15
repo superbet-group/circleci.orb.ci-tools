@@ -16,5 +16,4 @@ steps:
   - run:
       name: docker login
       command: |
-        echo $BVLA
         echo ${<<parameters.docker-pass>>} | docker login -u ${<<parameters.docker-user>>} --password-stdin
