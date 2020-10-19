@@ -29,7 +29,7 @@ steps:
       docker_layer_caching: true
   - aws-cli/install
   - aws-ecr/ecr-login
-  - docker-login
+  - docker/check
   - docker/build:
       image: << parameters.image-name >>
       extra_build_args: << parameters.extra-build-args >>

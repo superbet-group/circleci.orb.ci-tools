@@ -31,7 +31,7 @@ steps:
       docker_layer_caching: true
   - aws-cli/install
   - aws-ecr/ecr-login
-  - docker-login
+  - docker/check
   - aws-ecr/build-and-push-image:
       checkout: false
       repo: <<parameters.image-name>>
